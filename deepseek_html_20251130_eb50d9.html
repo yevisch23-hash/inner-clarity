@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пространство внутренней ясности | Простір внутрішньої ясності</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #5a7d7c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #486463;
+            transform: translateY(-3px);
+        }
+        
+        /* Языковой переключатель */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 30px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active {
+            background-color: #5a7d7c;
+            color: white;
+        }
+        
+        /* Блок 1 - Главный экран */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 150px 0;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Блок 2 - Мини-о тебе */
+        .about-mini {
+            text-align: center;
+            background-color: white;
+        }
+        
+        .about-mini p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Блок 3 - Услуга */
+        .service {
+            background-color: #f0f5f5;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .service-card h3 {
+            color: #5a7d7c;
+        }
+        
+        .price {
+            background-color: #f8f3e6;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 25px 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .service-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        /* Блок 4 - Как проходит встреча */
+        .process {
+            background-color: white;
+        }
+        
+        .process-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .process-item {
+            display: flex;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        
+        .process-number {
+            background-color: #5a7d7c;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        /* Блок 5 - Форматы */
+        .formats {
+            background-color: #f0f5f5;
+        }
+        
+        .format-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .format-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .format-card h3 {
+            color: #5a7d7c;
+            margin-bottom: 15px;
+        }
+        
+        /* Блок 6 - Отзывы */
+        .reviews {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .reviews-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .review-card {
+            background-color: #f8f3e6;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 350px;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .review-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .review-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #5a7d7c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info {
+            flex: 1;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .author-age {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Блок 7 - Обо мне */
+        .about-extended {
+            background-color: #f0f5f5;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Блок 8 - Контакты */
+        .contacts {
+            background-color: white;
+        }
+        
+        .contact-list {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #5a7d7c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+        
+        /* Модальное окно оплаты */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-option:hover {
+            border-color: #5a7d7c;
+            background-color: #f0f5f5;
+        }
+        
+        .payment-option i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+            color: #5a7d7c;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .hero {
+                padding: 100px 0;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .format-cards {
+                flex-direction: column;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .reviews-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Языковой переключатель -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="ua">UA</button>
+    </div>
+
+    <!-- БЛОК 1 — Главный экран -->
+    <section class="hero">
+        <div class="container">
+            <h1 data-ru="Ты можешь слышать себя. Даже если мир шумит." data-ua="Ти можеш чути себе. Навіть якщо світ шумить.">Ты можешь слышать себя. Даже если мир шумит.</h1>
+            <p data-ru="Индивидуальные встречи ясности — онлайн или оффлайн.<br>Для тех, кто хочет понять, что происходит внутри, и вернуть опору." data-ua="Індивідуальні зустрічі ясності — онлайн чи офлайн.<br>Для тих, хто хоче зрозуміти, що відбувається всередині, і повернути опору.">Индивидуальные встречи ясности — онлайн или оффлайн.<br>Для тех, кто хочет понять, что происходит внутри, и вернуть опору.</p>
+            <a href="#contacts" class="btn" data-ru="➡️ Записаться на встречу" data-ua="➡️ Записатися на зустріч">➡️ Записаться на встречу</a>
+        </div>
+    </section>
+
+    <!-- БЛОК 2 — Мини-о тебе -->
+    <section class="about-mini">
+        <div class="container">
+            <h2 data-ru="Кто я" data-ua="Хто я">Кто я</h2>
+            <p data-ru="Я создаю пространство, где можно выдохнуть, услышать себя и снова почувствовать своё направление.<br>Работаю мягко, глубоко, по-человечески.<br>Помогаю тем, кто устал тащить всё в одиночку." data-ua="Я створюю простір, де можна видихнути, почути себе і знову відчути свій напрямок.<br>Працюю м'яко, глибоко, по-людськи.<br>Допомагаю тим, хто втомився тягнути все в самотності.">Я создаю пространство, где можно выдохнуть, услышать себя и снова почувствовать своё направление.<br>Работаю мягко, глубоко, по-человечески.<br>Помогаю тем, кто устал тащить всё в одиночку.</p>
+        </div>
+    </section>
+
+    <!-- БЛОК 3 — Услуга №1 -->
+    <section class="service">
+        <div class="container">
+            <div class="service-card">
+                <h3 data-ru="Индивидуальная встреча «Внутренняя ясность»" data-ua="Індивідуальна зустріч «Внутрішня ясність»">Индивидуальная встреча «Внутренняя ясность»</h3>
+                <p><strong data-ru="Онлайн или оффлайн • 60 минут" data-ua="Онлайн чи офлайн • 60 хвилин">Онлайн или оффлайн • 60 минут</strong></p>
+                <p data-ru="Эта встреча — тихое пространство для тех, кто запутался, устал или стоит перед выбором.<br>Мы мягко разбираем твой внутренний узел, возвращаем ясность и первое ощущение направления." data-ua="Ця зустріч — тихий простір для тих, хто заплутався, втомився або стоїть перед вибором.<br>Ми м'яко розбираємо твій внутрішній вузол, повертаємо ясність і перше відчуття напрямку.">Эта встреча — тихое пространство для тех, кто запутался, устал или стоит перед выбором.<br>Мы мягко разбираем твой внутренний узел, возвращаем ясность и первое ощущение направления.</p>
+                <div class="price" data-ru="600 грн • 60 минут (первая встреча)" data-ua="600 грн • 60 хвилин (перша зустріч)">600 грн • 60 минут (первая встреча)</div>
+                <div class="service-btn">
+                    <button class="btn open-payment" data-ru="➡️ Записаться и оплатить" data-ua="➡️ Записатися і сплатити">➡️ Записаться и оплатить</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 4 — Как проходит встреча -->
+    <section class="process">
+        <div class="container">
+            <h2 data-ru="Как проходит встреча" data-ua="Як проходить зустріч">Как проходит встреча</h2>
+            <div class="process-list">
+                <div class="process-item">
+                    <div class="process-number">1</div>
+                    <p data-ru="ты приходишь с состоянием или вопросом" data-ua="ти приходиш зі станом або питанням">ты приходишь с состоянием или вопросом</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">2</div>
+                    <p data-ru="мы мягко обсуждаем то, что происходит внутри" data-ua="ми м'яко обговорюємо те, що відбувається всередині">мы мягко обсуждаем то, что происходит внутри</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">3</div>
+                    <p data-ru="я показываю, где спрятаны напряжения, непонятые чувства и «узлы»" data-ua="я показую, де сховані напруження, непоняті почуття та «вузли»">я показываю, где спрятаны напряжения, непонятые чувства и «узлы»</p>
+                </div>
+                <div class="process-item">
+                    <div class="process-number">4</div>
+                    <p data-ru="ты уходишь с ощущением опоры и направлением, которое откликается" data-ua="ти йдеш з відчуттям опори та напрямком, який резонує">ты уходишь с ощущением опоры и направлением, которое откликается</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 5 — Форматы -->
+    <section class="formats">
+        <div class="container">
+            <h2 data-ru="Форматы встреч" data-ua="Формати зустрічей">Форматы встреч</h2>
+            <div class="format-cards">
+                <div class="format-card">
+                    <h3 data-ru="Онлайн" data-ua="Онлайн">Онлайн</h3>
+                    <p data-ru="— удобный формат, если ты далеко или нужен быстрый контакт" data-ua="— зручний формат, якщо ти далеко або потрібен швидкий контакт">— удобный формат, если ты далеко или нужен быстрый контакт</p>
+                    <p data-ru="— подходит, даже если связь нестабильная (можем перейти в аудио)" data-ua="— підходить, навіть якщо зв'язок нестабільний (можемо перейти в аудіо)">— подходит, даже если связь нестабильная (можем перейти в аудио)</p>
+                </div>
+                <div class="format-card">
+                    <h3 data-ru="Оффлайн" data-ua="Офлайн">Оффлайн</h3>
+                    <p data-ru="— для тех, кому важнее живое присутствие" data-ua="— для тих, кому важливіша жива присутність">— для тех, кому важнее живое присутствие</p>
+                    <p data-ru="— даёт больше глубины и спокойствия" data-ua="— дає більше глибини та спокою">— даёт больше глубины и спокойствия</p>
+                    <p data-ru="— подходит, если часто отключают свет" data-ua="— підходить, якщо часто відключають світло">— подходит, если часто отключают свет</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 6 — Отзывы -->
+    <section class="reviews">
+        <div class="container">
+            <h2 data-ru="Отзывы" data-ua="Відгуки">Отзывы</h2>
+            <div class="reviews-container">
+                <!-- Отзыв 1 (молодой клиент) -->
+                <div class="review-card">
+                    <div class="review-text" data-ru="Долго не решался обратиться, думал, что справлюсь сам. Но после встречи с Еленой понял, как много я в себе подавлял. Она помогла мне разобраться в моих истинных желаниях и страхах. Теперь у меня есть план и уверенность в завтрашнем дне." data-ua="Довго не наважувався звернутися, думав, що впораюся сам. Але після зустрічі з Оленою зрозумів, як багато я в собі пригнічував. Вона допомогла мені розібратися в моїх справжніх бажаннях і страхах. Тепер у мене є план і впевненість у завтрашньому дні.">Долго не решался обратиться, думал, что справлюсь сам. Но после встречи с Еленой понял, как много я в себе подавлял. Она помогла мне разобраться в моих истинных желаниях и страхах. Теперь у меня есть план и уверенность в завтрашнем дне.</div>
+                    <div class="review-author">
+                        <div class="author-avatar">А</div>
+                        <div class="author-info">
+                            <div class="author-name" data-ru="Андрей" data-ua="Андрій">Андрей</div>
+                            <div class="author-age">25 лет</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Отзыв 2 (клиент среднего возраста) -->
+                <div class="review-card">
+                    <div class="review-text" data-ru="В моем возрасте кажется, что ты уже всё про себя знаешь. Но кризис среднего возраста заставил усомниться. Елена помогла мне найти новые смыслы и переосмыслить жизненные приоритеты. Её мягкий, но точный подход позволил мне увидеть то, что я долго игнорировал." data-ua="У моєму віці здається, що ти вже все про себе знаєш. Але криза середнього віку змусила сумніватися. Олена допомогла мені знайти нові сенси і переосмислити життєві пріоритети. Її м'який, але точний підхід дозволив мені побачити те, що я довго ігнорував.">В моем возрасте кажется, что ты уже всё про себя знаешь. Но кризис среднего возраста заставил усомниться. Елена помогла мне найти новые смыслы и переосмыслить жизненные приоритеты. Её мягкий, но точный подход позволил мне увидеть то, что я долго игнорировал.</div>
+                    <div class="review-author">
+                        <div class="author-avatar">М</div>
+                        <div class="author-info">
+                            <div class="author-name" data-ru="Марина" data-ua="Марина">Марина</div>
+                            <div class="author-age">42 года</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Отзыв 3 (зрелый клиент) -->
+                <div class="review-card">
+                    <div class="review-text" data-ru="После выхода на пенсию я потеряла ощущение нужности. Встречи с Еленой помогли мне найти новые занятия и понять, что мой опыт ценен в любом возрасте. Она с таким уважением и вниманием отнеслась к моим переживаниям, что я снова почувствовала себя живой и значимой." data-ua="Після виходу на пенсію я втратила відчуття потрібності. Зустрічі з Оленою допомогли мені знайти нові заняття і зрозуміти, що мій досвід цінний у будь-якому віці. Вона з такою повагою і увагою поставилася до моїх переживань, що я знову відчула себе живою і значущою.">После выхода на пенсию я потеряла ощущение нужности. Встречи с Еленой помогли мне найти новые занятия и понять, что мой опыт ценен в любом возрасте. Она с таким уважением и вниманием отнеслась к моим переживаниям, что я снова почувствовала себя живой и значимой.</div>
+                    <div class="review-author">
+                        <div class="author-avatar">Н</div>
+                        <div class="author-info">
+                            <div class="author-name" data-ru="Надежда" data-ua="Надія">Надежда</div>
+                            <div class="author-age">64 года</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 7 — Обо мне -->
+    <section class="about-extended">
+        <div class="container">
+            <h2 data-ru="Обо мне" data-ua="Про мене">Обо мне</h2>
+            <div class="about-content">
+                <p data-ru="Я работаю с людьми, которые хотят не 'быстрый совет', а честный контакт с собой.<br>У меня многолетний опыт в обучении детей и взрослых, глубокое понимание человеческих состояний и мягкий подход к трансформации.<br>Вижу суть, помогаю разбираться в чувствах, возвращаю людей к их собственному направлению." data-ua="Я працюю з людьми, які хочуть не 'швидку пораду', а чесний контакт із собою.<br>У мене багаторічний досвід у навчанні дітей та дорослих, глибоке розуміння людських станів і м'який підхід до трансформації.<br>Бачу суть, допомагаю розбиратися в почуттях, повертаю людей до їх власного напрямку.">Я работаю с людьми, которые хотят не 'быстрый совет', а честный контакт с собой.<br>У меня многолетний опыт в обучении детей и взрослых, глубокое понимание человеческих состояний и мягкий подход к трансформации.<br>Вижу суть, помогаю разбираться в чувствах, возвращаю людей к их собственному направлению.</p>
+                <div style="margin-top: 30px;">
+                    <a href="#contacts" class="btn" data-ru="➡️ Записаться на встречу" data-ua="➡️ Записатися на зустріч">➡️ Записаться на встречу</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- БЛОК 8 — Контакты -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <h2 data-ru="Контакты" data-ua="Контакти">Контакты</h2>
+            <div class="contact-list">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+                    <div>
+                        <strong>Telegram:</strong> <a href="https://t.me/yelenaschastlivets">@yelenaschastlivets</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <strong>Email:</strong> yevisch23@gmail.com
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <strong data-ru="Локация для оффлайн встреч:" data-ua="Локація для офлайн зустрічей:">Локация для оффлайн встреч:</strong> <span data-ru="м.Днепр, пр. Науки" data-ua="м.Дніпро, пр. Науки">м.Днепр, пр. Науки</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно оплаты -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 data-ru="Оплата встречи" data-ua="Оплата зустрічі">Оплата встречи</h3>
+            <p data-ru="Выберите удобный способ оплаты:" data-ua="Оберіть зручний спосіб оплати:">Выберите удобный способ оплаты:</p>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-type="card">
+                    <i class="far fa-credit-card"></i>
+                    <div>
+                        <strong data-ru="Оплата картой" data-ua="Оплата карткою">Оплата картой</strong>
+                        <p data-ru="Безопасный платеж через платежную систему" data-ua="Безпечний платіж через платіжну систему">Безопасный платеж через платежную систему</p>
+                    </div>
+                </div>
+                <div class="payment-option" data-type="paypal">
+                    <i class="fab fa-paypal"></i>
+                    <div>
+                        <strong>PayPal</strong>
+                        <p data-ru="Международные платежи" data-ua="Міжнародні платежі">Международные платежи</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="paymentDetails">
+                <!-- Здесь будут отображаться детали оплаты -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функция переключения языка
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const elementsToTranslate = document.querySelectorAll('[data-ru]');
+            
+            // Устанавливаем русский язык по умолчанию
+            let currentLang = 'ru';
+            
+            langButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    
+                    // Обновляем активную кнопку
+                    langButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Меняем язык контента
+                    currentLang = lang;
+                    elementsToTranslate.forEach(element => {
+                        if (element.getAttribute(`data-${lang}`)) {
+                            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                                element.placeholder = element.getAttribute(`data-${lang}`);
+                            } else {
+                                element.innerHTML = element.getAttribute(`data-${lang}`);
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Модальное окно оплаты
+            const modal = document.getElementById('paymentModal');
+            const openPaymentBtn = document.querySelector('.open-payment');
+            const closeBtn = document.querySelector('.close');
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            const paymentDetails = document.getElementById('paymentDetails');
+            
+            openPaymentBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
+            
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Обработка выбора способа оплаты
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    
+                    // Убираем выделение со всех вариантов
+                    paymentOptions.forEach(opt => opt.style.borderColor = '#ddd');
+                    // Выделяем выбранный вариант
+                    this.style.borderColor = '#5a7d7c';
+                    
+                    // Показываем детали оплаты
+                    let detailsHTML = '';
+                    
+                    if (type === 'card') {
+                        detailsHTML = currentLang === 'ru' ? 
+                            '<div style="margin-top: 20px; padding: 15px; background: #f0f5f5; border-radius: 8px;">' +
+                            '<p><strong>Оплата банковской картой</strong></p>' +
+                            '<p>После нажатия кнопки "Оплатить" вы будете перенаправлены на безопасную страницу оплаты</p>' +
+                            '<button class="btn" style="margin-top: 15px; width: 100%;">Оплатить 600 грн</button>' +
+                            '</div>' :
+                            '<div style="margin-top: 20px; padding: 15px; background: #f0f5f5; border-radius: 8px;">' +
+                            '<p><strong>Оплата банківською карткою</strong></p>' +
+                            '<p>Після натискання кнопки "Сплатити" ви будете перенаправлені на безпечну сторінку оплати</p>' +
+                            '<button class="btn" style="margin-top: 15px; width: 100%;">Сплатити 600 грн</button>' +
+                            '</div>';
+                    } else if (type === 'paypal') {
+                        detailsHTML = currentLang === 'ru' ? 
+                            '<div style="margin-top: 20px; padding: 15px; background: #f0f5f5; border-radius: 8px;">' +
+                            '<p><strong>Оплата через PayPal</strong></p>' +
+                            '<p>Email для перевода: <strong>yevisch23@gmail.com</strong></p>' +
+                            '<p>Сумма: 600 грн (примерно $15)</p>' +
+                            '<p>После оплаты отправьте подтверждение в Telegram</p>' +
+                            '</div>' :
+                            '<div style="margin-top: 20px; padding: 15px; background: #f0f5f5; border-radius: 8px;">' +
+                            '<p><strong>Оплата через PayPal</strong></p>' +
+                            '<p>Email для переказу: <strong>yevisch23@gmail.com</strong></p>' +
+                            '<p>Сума: 600 грн (приблизно $15)</p>' +
+                            '<p>Після оплати надішліть підтвердження у Telegram</p>' +
+                            '</div>';
+                    }
+                    
+                    paymentDetails.innerHTML = detailsHTML;
+                });
+            });
+            
+            // Функция для плавной прокрутки к якорям
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 50,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
